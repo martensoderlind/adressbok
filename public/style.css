@@ -1,0 +1,90 @@
+.inria-sans-light {
+    font-family: "Inria Sans", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+
+.inria-sans-regular {
+font-family: "Inria Sans", sans-serif;
+font-weight: 400;
+font-style: normal;
+}
+
+.inria-sans-bold {
+font-family: "Inria Sans", sans-serif;
+font-weight: 700;
+font-style: normal;
+}
+.inria-sans-medium {
+font-family: "Inria Sans", sans-serif;
+font-weight: 600;
+font-style: normal;
+margin: 5px;
+}
+
+.hidden{
+    display: none;
+}
+
+.card{
+    width: 250px;
+    height: 120px;
+    border-radius: 10px;
+    background-color: rgb(87, 160, 136);
+    padding-left: 5px;
+    margin-top: 15px;
+}
+.flex{
+    display: flex;
+    flex-direction: column;
+}
+
+#editButtton{
+
+}
+#deleteButton{
+ background-color: red;
+ color: aliceblue;
+}
+
+#addButton{
+    margin-top: 10px;
+}
+.delete:hover{
+    background-color: rgb(238, 79, 79);
+}
+.cardButton{
+    width: auto;
+    padding: 0 3px;
+    height: 30px;
+    border-radius: 5px;
+    border: none;
+    padding: 5px 7px;
+    margin: 2px;
+}
+.cardbuttons{
+    align-self: flex-end;
+    padding-left: 125px;
+}
+.nyPerson{
+    border-bottom: solid grey 2px;
+    border-top: solid grey 2px;
+    width: 400px;
+    margin: 5px 0;
+    padding: 5px 0;
+}
+.inputfield{
+    background-color: rgb(206, 206, 206);
+    border-radius: 7px;
+    border:  none;
+    padding: 6px;
+    margin-bottom:5px;
+}
+
+.name{
+    margin: 0px;
+    padding-top: 5px;
+}
+.email{
+    color: rgb(17, 22, 22);
+}

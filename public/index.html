@@ -4,23 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Adressbok</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.0.0/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
         <div>
-            <h1>Adressbok</h1>
+            <h1 class="inria-sans-bold">Adressbok</h1>
         </div>
         <div>
             <form action="" method="get">
-                <input type="text" placeholder="Sök">
-                <span class="icon-[material-symbols-light--search]"></span>
-                <button>Sök</button>
+                <input class="inputfield" type="text" placeholder="Sök">
+                <button class="cardButton">Sök</button>
             </form>
+            <button id="addButton" class="cardButton"> Lägg till person</button>
         </div>
     </header> 
+    <div class="nyPerson hidden" id="addPersonDiv">
+        <h4 class="inria-sans-medium">Lägg till person</h4>
+        <form action="">
+            <input type="text" name="" id="addName" placeholder="Name" class="inputfield">
+            <input type="text" name="" id="addEmail" placeholder="Email" class="inputfield">
+        </form>
+        <div>
+            <button class="cardButton">Lägg till</button>
+            <button class="cardButton" id="avbrytButton">Avbryt</button>
+        </div>
+    </div>
     <div id="adressbokDiv">
-        
     </div>   
     <script src="index.js"></script>
 </body>
