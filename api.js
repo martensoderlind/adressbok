@@ -48,6 +48,10 @@ app.get('/person/:id',(req, res)=>{
     res.json(person)
 });
 
+app.get('/person',(req, res)=>{
+    res.json(adressbok)
+});
+
 app.patch('/person/:id',[
     check('name').optional().notEmpty().withMessage('Name is required.'),
     check('email').optional().isEmail().withMessage('enter a valid email.'),

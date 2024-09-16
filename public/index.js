@@ -4,18 +4,18 @@ async function adressbok() {
         const data = await response.json();
 
         const adressbokDiv= document.getElementById('adressbokDiv');
-        adressbokDiv = "";
+        adressbokDiv.innerHTML = "";
 
         data.forEach(person => {
             const personCard = document.createElement('div');
             personCard.innerHTML=`
-            <h3>${person.name}</h3>
-            <p>${person.email}</p>
-            `;
+                <h3>${person.name}</h3>
+                <p>E-post: ${person.email}</p>
+            `;;
             adressbokDiv.appendChild(personCard);
         });
     } catch(error){
         console.error('Error when trying to fetch adressbok: ', error)
     };
 };
-window.onload = adressbok;
+window.onload = adressbok();
