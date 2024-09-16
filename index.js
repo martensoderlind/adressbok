@@ -45,6 +45,18 @@ app.patch('/person/:id',(req, res)=>{
     res.json(person);
 });
 
+app.patch('/person/:id',(req, res)=>{
+    const personID = parseInt(req.params.id);
+    const personIndex =  adressbok.findIndex(p => p.id ===personID)
+
+    if(!personIndex){
+        return res.status(404).json({message: 'the person could not be found'})
+    };
+    const name = adressbok[personIndex].name
+    adressbok.splice(personIndex,1);
+    res.json({message: `${name} have been removed.`})
+});
+
 app.listen(port,()=>{
     console.log(`server running at http://localhost:${port}`)
 });
