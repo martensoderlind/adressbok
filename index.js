@@ -14,6 +14,10 @@ app.post('/person',(req, res)=>{
     };
     adressbok.push(newPerson);
     res.status(201).json(newPerson);
+});
+
+app.get('/',(req, res)=>{
+    res.json(adressbok);
 })
 
 app.listen(port,()=>{
