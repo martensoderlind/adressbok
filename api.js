@@ -1,11 +1,12 @@
 const express = require('express');
+const path = require('path');
 const app = express();
 const port = 3000;
 const {check, validationResult} = require('express-validator');
 
-
 app.use(express.json());
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
+
 
 let adressbok = [{
     id:1,
@@ -33,7 +34,7 @@ app.post('/person',
 });
 
 app.get('/',(req, res)=>{
-    res.json(adressbok);
+    res.sendFile(path.join(__dirname,"public","index.html"));
 });
 
 app.get('/person/:id',(req, res)=>{
