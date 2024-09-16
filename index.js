@@ -37,16 +37,16 @@ app.get('/person/:id',(req, res)=>{
 
 app.patch('/person/:id',(req, res)=>{
     const personID = parseInt(req.params.id);
-    const person =  adressbok.find(p => p.id ===personID)
+    const person =  adressbok.findIndex(p => p.id ===personID)
 
     if(!person){
         return res.status(404).json({message: 'the person could not be found'})
     };
 
-    person.name = req.params.name || person.name;
-    person.email = req.params.email || person.email;
+    adressbok[person].name = req.body.name || adressbok[person].name;
+    adressbok[person].email = req.body.email || adressbok[person].email;
 
-    res.json(person);
+    res.json(adressbok[person]);
 });
 
 app.delete('/person/:id',(req, res)=>{
