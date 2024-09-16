@@ -5,6 +5,7 @@ const {check, validationResult} = require('express-validator');
 
 
 app.use(express.json());
+app.use(express.static('public'));
 
 let adressbok = [{
     id:1,
