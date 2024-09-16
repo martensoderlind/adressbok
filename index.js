@@ -4,7 +4,11 @@ const port = 3000;
 
 app.use(express.json());
 
-let adressbok = [];
+let adressbok = [{
+    id:1,
+    name:"Mårten",
+    email:"marten@dev.se"
+}];
 
 app.post('/person',(req, res)=>{
     const newPerson = {
@@ -45,7 +49,7 @@ app.patch('/person/:id',(req, res)=>{
     res.json(person);
 });
 
-app.patch('/person/:id',(req, res)=>{
+app.delete('/person/:id',(req, res)=>{
     const personID = parseInt(req.params.id);
     const personIndex =  adressbok.findIndex(p => p.id ===personID)
 
