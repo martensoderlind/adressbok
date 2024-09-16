@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 const port = 3000;
+const {check, validationResult} = require('express-validator');
+
 
 app.use(express.json());
 
@@ -10,7 +12,16 @@ let adressbok = [{
     email:"marten@dev.se"
 }];
 
-app.post('/person',(req, res)=>{
+app.post('/person',
+    [
+        check('name').notEmpty().withMessage('Name is required.'),
+        check('email').isEmail().withMessage('enter a valid email.')
+    ],(req, res)=>{
+    const errors = validationResult(req);
+    if(!errors.isEmpty()){
+        return res.status(400).json({error: errors.array()});
+    };
+
     const newPerson = {
         id:adressbok.length+1,
         name: req.body.name,
@@ -35,7 +46,14 @@ app.get('/person/:id',(req, res)=>{
     res.json(person)
 });
 
-app.patch('/person/:id',(req, res)=>{
+app.patch('/person/:id',[
+    check('name').optional().notEmpty().withMessage('Name is required.'),
+    check('email').optional().isEmail().withMessage('enter a valid email.'),
+],(req, res)=>{
+    const errors = validationResult(req);
+    if(!errors.isEmpty()){
+        return res.status(400).json({error: errors.array()});
+    };
     const personID = parseInt(req.params.id);
     const person =  adressbok.findIndex(p => p.id ===personID)
 
