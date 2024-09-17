@@ -3,6 +3,7 @@ const path = require('path');
 const app = express();
 const port = 3000;
 const {check, validationResult} = require('express-validator');
+const { Console } = require('console');
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
@@ -76,8 +77,7 @@ app.patch('/person/:id',[
 app.delete('/person/:id',(req, res)=>{
     const personID = parseInt(req.params.id);
     const personIndex =  adressbok.findIndex(p => p.id ===personID)
-    
-    if(!personIndex){
+    if(personIndex===-1){
         return res.status(404).json({message: 'the person could not be found'})
     };
     const name = adressbok[personIndex].name
