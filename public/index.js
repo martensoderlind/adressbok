@@ -12,11 +12,12 @@ async function adressbok() {
                 <h3 class="name inria-sans-regular">${person.name}</h3>
                 <p class="email inria-sans-light">E-post: ${person.email}</p>
                 <div class="cardbuttons">
-                    <button id="editButton" class="cardButton">Edit</button>
-                    <button id="deleteButton" class= "cardButton">Delete</button>
+                    <button id="editButton${person.id}" class="cardButton">Edit</button>
+                    <button class="cardButton" id=deleteButton${person.id} onClick="deletePerson(${person.id})">Delete</button>
                 </div>
             `;
       personCard.classList.add("card");
+      personCard.setAttribute('id',person.id)
       adressbokDiv.appendChild(personCard);
 
     });
@@ -69,11 +70,27 @@ async function addPerson(){
     adressbok();
   }catch (error) {
       console.error("Error: ", error);
-  }
-  
+  };  
 };
 
-async function deletePerson() {}
+async function deletePerson(id) {
+ const deletePersonDiv = document.getElementById(id);
+
+ try{
+  const response = await fetch(`/person/${id}`,{
+    method: 'DELETE'
+  });
+
+  if(!response.ok){
+    throw new Error('Response was not ok');
+  };
+
+  console.log("Person have been removed from adressbok.")
+  adressbok();
+ }catch(error){
+  console.log('Error: ',error);
+ };
+};
 
 window.onload = adressbok();
 document.addEventListener("DOMContentLoaded", function () {

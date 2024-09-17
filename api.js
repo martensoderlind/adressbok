@@ -76,7 +76,7 @@ app.patch('/person/:id',[
 app.delete('/person/:id',(req, res)=>{
     const personID = parseInt(req.params.id);
     const personIndex =  adressbok.findIndex(p => p.id ===personID)
-
+    
     if(!personIndex){
         return res.status(404).json({message: 'the person could not be found'})
     };
