@@ -64,7 +64,9 @@ async function addPerson(){
 
     const data = await response.json();
     console.log(`${newPerson.name} added to adressbok`);
-
+    newName.value="";
+    newEmail.value="";
+    adressbok();
   }catch (error) {
       console.error("Error: ", error);
   }
