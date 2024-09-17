@@ -9,10 +9,16 @@ async function adressbok() {
     data.forEach((person) => {
       const personCard = document.createElement("div");
       personCard.innerHTML = `
-                <h3 class="name inria-sans-regular">${person.name}</h3>
-                <p class="email inria-sans-light">E-post: ${person.email}</p>
+                <div>
+                <h3 class="name inria-sans-regular" id="name${person.id}">${person.name}</h3>
+                <input type="text" id="inputName${person.id}" placeholder="" class="inputfield hidden"/>
+                </div>
+                <div>
+                  <p class="email inria-sans-light" id="email${person.id}">E-post: ${person.email}</p>
+                  <input type="text" id="inputEmail${person.id}" placeholder="" class="inputfield hidden"/>
+                </div>
                 <div class="cardbuttons">
-                    <button id="editButton${person.id}" class="cardButton">Edit</button>
+                    <button id="editButton${person.id}" class="cardButton" onClick="editPerson(${person.id})">Edit</button>
                     <button class="cardButton" id=deleteButton${person.id} onClick="deletePerson(${person.id})">Delete</button>
                 </div>
             `;
@@ -23,10 +29,9 @@ async function adressbok() {
     });
   } catch (error) {
     console.error("Error when trying to fetch adressbok: ", error);
-  }
-}
+  };
+};
 
-async function editPerson() {}
 function openAddPerson() {
   const addPersonDiv = document.getElementById("addPersonDiv");
   if (addPersonDiv.classList.contains("hidden")) {
@@ -73,6 +78,39 @@ async function addPerson(){
   };  
 };
 
+async function editPerson(id) {
+ const editPersonDiv = document.getElementById(id);
+ const inputName =document.getElementById("inputName"+id);
+ const inputEmail =document.getElementById("inputEmail"+id);
+ const nameValue =document.getElementById("name"+id);
+ const emailValue =document.getElementById("email"+id);
+
+//  try{
+//   const response = await fetch('/person/:id',{
+//     method:'PATCH'
+//   });
+//   if(!response.ok){
+//     throw new Error("Problem with response");
+//   }
+  if(inputName.classList.contains("hidden")){
+    inputEmail.classList.remove("hidden");
+    inputName.classList.remove("hidden");
+    nameValue.classList.add("hidden");
+    emailValue.classList.add("hidden");
+
+
+  }else{
+    inputEmail.classList.add("hidden");
+    inputName.classList.add("hidden");
+    nameValue.classList.remove("hidden");
+    emailValue.classList.remove("hidden");
+  }
+
+//  }catch(error){
+//   console.log("Error: ",error);
+//  }
+};
+
 async function deletePerson(id) {
  const deletePersonDiv = document.getElementById(id);
 
@@ -94,8 +132,6 @@ async function deletePerson(id) {
 
 window.onload = adressbok();
 document.addEventListener("DOMContentLoaded", function () {
-  // document.getElementById("deleteButton").addEventListener("click", deletePerson);
-  // document.getElementById("editButton").addEventListener("click", editPerson);
   document.getElementById("newPersonButton").addEventListener("click", openAddPerson);
   document
     .getElementById("avbrytButton")
