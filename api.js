@@ -40,12 +40,10 @@ app.get('/',(req, res)=>{
 
 app.get('/person/:id',(req, res)=>{
     const personID = parseInt(req.params.id);
-    const person =  adressbok.find(p => p.id ===personID)
-
+    const person =  adressbok.find(p => p.id === personID)
     if(!person){
         return res.status(404).json({message: 'the person could not be found'})
     };
-
     res.json(person)
 });
 

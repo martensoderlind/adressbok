@@ -79,26 +79,28 @@ async function addPerson(){
 };
 
 async function editPerson(id) {
- const editPersonDiv = document.getElementById(id);
  const inputName =document.getElementById("inputName"+id);
  const inputEmail =document.getElementById("inputEmail"+id);
  const nameValue =document.getElementById("name"+id);
  const emailValue =document.getElementById("email"+id);
 
-//  try{
-//   const response = await fetch('/person/:id',{
-//     method:'PATCH'
-//   });
-//   if(!response.ok){
-//     throw new Error("Problem with response");
-//   }
+ try{
+  const response = await fetch(`/person/${id}`,{
+    method:'GET'
+  });
+  
+  if(!response.ok){
+    throw new Error("Problem with response");
+  };
+  const data = await response.json();
   if(inputName.classList.contains("hidden")){
     inputEmail.classList.remove("hidden");
     inputName.classList.remove("hidden");
     nameValue.classList.add("hidden");
     emailValue.classList.add("hidden");
-
-
+    
+    inputName.value=data.name;
+    inputEmail.value=data.email;
   }else{
     inputEmail.classList.add("hidden");
     inputName.classList.add("hidden");
@@ -106,9 +108,9 @@ async function editPerson(id) {
     emailValue.classList.remove("hidden");
   }
 
-//  }catch(error){
-//   console.log("Error: ",error);
-//  }
+ }catch(error){
+  console.log("Error: ",error);
+ }
 };
 
 async function deletePerson(id) {
