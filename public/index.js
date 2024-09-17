@@ -20,7 +20,7 @@ async function adressbok() {
                 <div class="cardbuttons">
                     <button id="editButton${person.id}" class="cardButton" onClick="openEditPerson(${person.id})">Edit</button>
                     <button id="saveEditButton${person.id}" class="cardButton hidden" onClick="saveEditPerson(${person.id})">Save</button>
-                    <button class="cardButton hidden" id="cancelButton${person.id}" onClick="deletePerson(${person.id})">Cancel</button>
+                    <button class="cardButton hidden" id="cancelButton${person.id}" onClick="cancelEdit()">Cancel</button>
                     <button class="cardButton" id="deleteButton${person.id}" onClick="deletePerson(${person.id})">Delete</button>
                 </div>
             `;
@@ -126,6 +126,11 @@ async function openEditPerson(id) {
  }catch(error){
   console.log("Error: ",error);
  }
+};
+
+function cancelEdit(){
+  // bad approach if there are many contacts..
+  adressbok();
 };
 
 async function saveEditPerson(id) {
