@@ -19,6 +19,8 @@ async function adressbok() {
                 </div>
                 <div class="cardbuttons">
                     <button id="editButton${person.id}" class="cardButton" onClick="editPerson(${person.id})">Edit</button>
+                    <button id="saveEditButton${person.id}" class="cardButton hidden" onClick="saveEditPerson(${person.id})">Save</button>
+                    <button class="cardButton hidden" id=cancelButton${person.id} onClick="deletePerson(${person.id})">Cancel</button>
                     <button class="cardButton" id=deleteButton${person.id} onClick="deletePerson(${person.id})">Delete</button>
                 </div>
             `;
