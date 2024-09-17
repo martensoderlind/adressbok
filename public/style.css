@@ -39,8 +39,8 @@
   flex-direction: column;
 }
 
-#editButtton {
-}
+/* #editButtton {
+} */
 #deleteButton {
   background-color: red;
   color: aliceblue;
