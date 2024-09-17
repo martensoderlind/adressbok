@@ -18,10 +18,10 @@ async function adressbok() {
                   <input type="text" id="inputEmail${person.id}" placeholder="" class="inputfield hidden"/>
                 </div>
                 <div class="cardbuttons">
-                    <button id="editButton${person.id}" class="cardButton" onClick="editPerson(${person.id})">Edit</button>
+                    <button id="editButton${person.id}" class="cardButton" onClick="openEditPerson(${person.id})">Edit</button>
                     <button id="saveEditButton${person.id}" class="cardButton hidden" onClick="saveEditPerson(${person.id})">Save</button>
-                    <button class="cardButton hidden" id=cancelButton${person.id} onClick="deletePerson(${person.id})">Cancel</button>
-                    <button class="cardButton" id=deleteButton${person.id} onClick="deletePerson(${person.id})">Delete</button>
+                    <button class="cardButton hidden" id="cancelButton${person.id}" onClick="deletePerson(${person.id})">Cancel</button>
+                    <button class="cardButton" id="deleteButton${person.id}" onClick="deletePerson(${person.id})">Delete</button>
                 </div>
             `;
       personCard.classList.add("card");
@@ -80,11 +80,15 @@ async function addPerson(){
   };  
 };
 
-async function editPerson(id) {
+async function openEditPerson(id) {
  const inputName =document.getElementById("inputName"+id);
  const inputEmail =document.getElementById("inputEmail"+id);
  const nameValue =document.getElementById("name"+id);
  const emailValue =document.getElementById("email"+id);
+ const editButton =document.getElementById("editButton"+id);
+ const deleteButton =document.getElementById("deleteButton"+id);
+ const saveButton =document.getElementById("saveEditButton"+id);
+ const cancelButton =document.getElementById("cancelButton"+id);
 
  try{
   const response = await fetch(`/person/${id}`,{
@@ -98,21 +102,55 @@ async function editPerson(id) {
   if(inputName.classList.contains("hidden")){
     inputEmail.classList.remove("hidden");
     inputName.classList.remove("hidden");
+    saveButton.classList.remove("hidden");
+    cancelButton.classList.remove("hidden");
     nameValue.classList.add("hidden");
     emailValue.classList.add("hidden");
+    editButton.classList.add("hidden");
+    deleteButton.classList.add("hidden");
     
     inputName.value=data.name;
     inputEmail.value=data.email;
-  }else{
-    inputEmail.classList.add("hidden");
-    inputName.classList.add("hidden");
-    nameValue.classList.remove("hidden");
-    emailValue.classList.remove("hidden");
-  }
+  };
+  // else{
+  // //   inputEmail.classList.add("hidden");
+  // //   inputName.classList.add("hidden");
+  // //   saveButton.classList.add("hidden");
+  // //   cancelButton.classList.add("hidden");
+  // //   nameValue.classList.remove("hidden");
+  // //   emailValue.classList.remove("hidden");
+  // //   saveButton.classList.remove("hidden");
+  // //   cancelButton.classList.remove("hidden");
+  // // }
 
  }catch(error){
   console.log("Error: ",error);
  }
+};
+
+async function saveEditPerson(id) {
+  const inputName =document.getElementById("inputName"+id).value;
+  const inputEmail =document.getElementById("inputEmail"+id).value;
+  const updatedPerson ={
+    "name":inputName,
+    "email": inputEmail
+  };
+  try{
+    const response =await fetch(`/person/${id}`,{
+      method:"PATCH",
+      headers: {
+        'content-Type': 'application/JSON'
+      },
+      body:JSON.stringify(updatedPerson),
+    });
+    if(!response.ok){
+      throw new Error("Problem with response");
+    };
+    console.log(`${inputName} have been updated.`)
+    adressbok();
+  }catch(error){
+    console.log("Error:", error);
+  };
 };
 
 async function deletePerson(id) {

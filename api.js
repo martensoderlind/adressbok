@@ -51,18 +51,11 @@ app.get('/person',(req, res)=>{
     res.json(adressbok)
 });
 
-app.patch('/person/:id',[
-    check('name').optional().notEmpty().withMessage('Name is required.'),
-    check('email').optional().isEmail().withMessage('enter a valid email.'),
-],(req, res)=>{
-    const errors = validationResult(req);
-    if(!errors.isEmpty()){
-        return res.status(400).json({error: errors.array()});
-    };
+app.patch('/person/:id',(req, res)=>{
     const personID = parseInt(req.params.id);
     const person =  adressbok.findIndex(p => p.id ===personID)
 
-    if(!person){
+    if(!person===-1){
         return res.status(404).json({message: 'the person could not be found'})
     };
 
